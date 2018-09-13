@@ -1,3 +1,5 @@
+#include <iostream>
+
 //Enumeração para facilitar a alocação dos navios na matriz.
 enum flags
 {
@@ -12,45 +14,10 @@ enum flags
 };
 
 //Gerador de símbolos para os navios.
-char make_symbol( flags x  )
-{
-	switch( x )
-	{
-		case WATER:
-			return '-';
-			break;
-		case SUBMARINE:
-			return '0';
-			break;
-		case HEAD_H:
-			return '<';
-			break;
-		case HEAD_V:
-			return '^';
-			break;
-		case TAIL_H:
-			return '>';
-			break;
-		case TAIL_V:
-			return 'V';
-			break;
-		case BODY:
-			return 'O';
-			break;
-	}
-}
+char make_symbol( flags x  );
 
-//Gerador da matriz genérica
-char * generator( char ** A[][], int qtd)
-{
-	int count {0};
-	while( count != qtd)
-	{	
-	
-		for( auto i ; i <= col ; i++){
-			for( auto j ; j <= lin ; j++){
-				
-			}
-		}
-	}
-}
+//Gerador da matriz genérica.
+void generator_def( char ** first, int lin, int col);
+
+//Função para "printar os caracteres na tela".
+void print_puzze( char ** first, int lin, int col);
