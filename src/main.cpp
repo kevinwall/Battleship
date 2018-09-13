@@ -16,9 +16,9 @@ int main()
 
 	generator_def(A, SIZE, SIZE);
 
-	auto B = validate_position_col( int col);
+	auto B = validate_position_col( SIZE);
 
-	auto C = validate_position_lin( int lin);
+	auto C = validate_position_lin( SIZE);
 
 	
 
