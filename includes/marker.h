@@ -1,4 +1,8 @@
 #include <iostream>
+#include <algorithm>
+#include "armada.h"
+#include "insert.h"
+#include <iterator>
 
 //Enumeração para facilitar a alocação dos navios na matriz.
 enum flags
@@ -20,4 +24,4 @@ char make_symbol( flags x  );
 void generator_def( char ** first, int lin, int col);
 
 //Função para "printar os caracteres na tela".
-void print_puzze( char ** first, int lin, int col);
+void print_puzzle( char ** first, int lin, int col);

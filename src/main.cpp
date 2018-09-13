@@ -16,7 +16,11 @@ int main()
 
 	generator_def(A, SIZE, SIZE);
 
-	print_puzze(A, SIZE, SIZE);
+	auto B = validate_position_col( int col);
+
+	auto C = validate_position_lin( int lin);
+
+	
 
 	delete A;
 }

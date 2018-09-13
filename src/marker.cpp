@@ -42,11 +42,13 @@ void generator_def( char ** first, int lin, int col)
 			first[i][j] = make_symbol(WATER);
 		}
 	}
+
+
 }
 
-void print_puzze( char ** first, int lin, int col)
+void print_puzzle( char ** first, int lin, int col)
 {
-	std::cout<<"Printing puzze..."<<std::endl;
+	std::cout<<"Printing puzzle..."<<std::endl;
 	for(auto i{0}; i < lin; i++)
 	{
 		for(auto j{0}; j < col; j++)
