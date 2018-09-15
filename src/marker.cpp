@@ -1,39 +1,39 @@
 #include "../includes/marker.h"
 
-char make_symbol( flags x  )
+int make_symbol( flags x  )
 {
 	switch( x )
 	{
 		case WATER:
-			return '-';
+			return 0;
 			break;
 		case SUBMARINE:
-			return '0';
+			return 1;
 			break;
 		case HEAD_H:
-			return '<';
+			return 2;
 			break;
 		case HEAD_V:
-			return '^';
+			return 3;
 			break;
 		case TAIL_H:
-			return '>';
+			return 4;
 			break;
 		case TAIL_V:
-			return 'V';
+			return 5;
 			break;
 		case BODY:
-			return 'O';
+			return 6;
 			break;
 		case INVALID:
-			return 'x';
+			return 7;
 			break;
 	}
 
-	return 'x';
+	return 7;
 }
 
-void generator_def( char ** first, int lin, int col)
+void generator_def( int ** first, int lin, int col)
 {
 	for( auto i{0} ; i < lin ; i++)
 	{
@@ -46,7 +46,7 @@ void generator_def( char ** first, int lin, int col)
 
 }
 
-void print_puzzle( char ** first, int lin, int col)
+void print_puzzle( int ** first, int lin, int col)
 {
 	std::cout<<"Printing puzzle..."<<std::endl;
 	for(auto i{0}; i < lin; i++)

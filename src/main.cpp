@@ -5,22 +5,22 @@ int main()
 
 	int SIZE{15};
 
-	char ** A;
+	int ** A;
 
-	A = new char* [SIZE];
+	A = new int* [SIZE];
 
 	for(auto i{0}; i < SIZE; i++)
 	{
-		A[i] = new char [SIZE];
+		A[i] = new int [SIZE];
 	}
 
 	generator_def(A, SIZE, SIZE);
 
-	auto B = validate_position_col( SIZE);
+	//auto B = validate_position_col( SIZE);
 
-	auto C = validate_position_lin( SIZE);
+	//auto C = validate_position_lin( SIZE);
 
-	
+	print_puzzle(A, SIZE, SIZE);
 
 	delete A;
 }

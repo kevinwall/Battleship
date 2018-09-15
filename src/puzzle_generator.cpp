@@ -3,7 +3,7 @@
 
 bool compare_map( )
 
-char * print_map( int A[]){
+int * print_map( int A[]){
 
 }
 
@@ -23,7 +23,7 @@ int main( int argc , char * argv[])
 	map.open("Puzzles.txt");
 	map << argv[1];
 	
-	char A[10][10];
+	int A[10][10];
 
 	generator( int )
 
