@@ -1,10 +1,10 @@
 #include <iostream>
 #include <algorithm>
-//#include "armada.h"
-//#include "insert.h"
 #include <iterator>
 
-//Enumeração para facilitar a alocação dos navios na matriz.
+/**
+*@brief Enumeração flags responsável por "tokenizar" os símbolos da matriz.
+*/
 enum flags
 {
 	WATER = 0,
@@ -17,11 +17,24 @@ enum flags
 	INVALID 
 };
 
-//Gerador de símbolos para os navios.
+/**
+*@brief Função make_symbol que gera símbolos para o tabuleiro baseado na enumeração.
+*@param flags x: Este parâmetro indica o tipo de caractere que se deseja gerar.
+*/
 int make_symbol( flags x  );
 
-//Gerador da matriz genérica.
+/**
+*@brief Gerador default que cria uma matriz preenchida com água.
+*@param int** first: Ponteiro para o início da matriz.
+*@param int lin: quantidade de linhas da matriz.
+*@param int col: quantidade de colunas da matriz.
+*/
 void generator_def( int ** first, int lin, int col);
 
-//Função para "printar os caracteres na tela".
+/**
+*@brief Função para printar o tabuleiro no terminal.
+*@param int** first: Ponteiro para o início da matriz.
+*@param int lin: quantidade de linhas da matriz.
+*@param int col: quantidade de colunas da matriz.
+*/
 void print_puzzle( int ** first, int lin, int col);
