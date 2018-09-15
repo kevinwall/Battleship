@@ -1,6 +1,7 @@
 #include "../includes/marker.h"
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 int * validate_position_col( int col)
 {
@@ -9,23 +10,9 @@ int * validate_position_col( int col)
 	for( auto i{0} ; i < col; i++)
 	{
 		A[i] = i;
-	}
-
-	std::cout <<"Vetor colunas: ["; 
-	for( auto i{0} ; i < col; i++)
-	{
-		std::cout << A[i] << " " ; 
-	}
-	std::cout<<"]"<<std::endl ; 
+	} 
 
 	std::random_shuffle( A, A+col );
-
-	std::cout <<"Vetor colunas: ["; 
-	for( auto i{0} ; i < col; i++)
-	{
-		std::cout << A[i] << " " ; 
-	}
-	std::cout<<"]"<<std::endl ; 
 
 	return A;
 }
@@ -39,21 +26,7 @@ int * validate_position_lin( int lin)
 		A[i] = i;
 	}
 
-	std::cout <<"Vetor linhas: ["; 
-	for( auto i{0} ; i < lin; i++)
-	{
-		std::cout << A[i] << " " ; 
-	}
-	std::cout<<"]"<<std::endl ; 
-
 	std::random_shuffle( A, A+lin );
-
-	std::cout <<"Vetor linhas: ["; 
-	for( auto i{0} ; i < lin; i++)
-	{
-		std::cout << A[i] << " " ; 
-	}
-	std::cout<<"]"<<std::endl ; 
 
 	return A;
 }
@@ -392,8 +365,9 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 				}
 			}	
 		}
-		else if(b+boat == lin-1)
+		else if(b+1 == lin)
 		{
+			//std::cout<<"Entrei no caso b+1"<<std::endl;
 			if(c-1 < 0)
 			{
 				for(auto i{b-1}; i <= b; i++)
@@ -422,6 +396,8 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 			}
 			else
 			{
+				//std::cout<<"Matriz do caso b+1, c  def"<<std::endl;
+				//print_puzzle(A,15, 15);
 				for(auto i{b-1}; i <= b; i++)
 				{
 					for(auto j{c-1}; j <= c+boat; j++)
@@ -495,7 +471,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else if(b+boat == lin-1)
+			else if(b+boat == lin)
 			{
 				for(auto i{b-1}; i <= b+boat-1; i++)
 				{
@@ -522,7 +498,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 				}
 			}
 		}
-		else if(c+1 == col-1)
+		else if(c+1 == col)
 		{
 			if(b-1 < 0)
 			{
@@ -537,7 +513,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else if(b+boat == lin-1)
+			else if(b+boat == lin)
 			{
 				for(auto i{b-1}; i <= b+boat-1; i++)
 				{
@@ -579,7 +555,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else if(b+boat == lin-1)
+			else if(b+boat == lin)
 			{
 				for(auto i{b-1}; i <= b+boat-1; i++)
 				{
@@ -670,7 +646,7 @@ bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 		{
 			if(A[B[i]][C[j]] == 0)//Verifica se na posição (X, Y) da matriz há espaço para a inserção.
 			{
-				std::cout<<"Valor de B : "<<B[i]<<" e C: "<<C[j]<<std::endl;
+				//std::cout<<"Valor de B : "<<B[i]<<" e C: "<<C[j]<<std::endl;
 				for(auto k{0}; k < 2; k++)
 				{
 					//std::cout<<"TESTE 1"<<std::endl;
@@ -686,7 +662,8 @@ bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 						if(res_2 == true)
 						{
 							insert_boat(A, B[i], C[j], boat, pos[k]);
-							std::cout<<"Inseri um barco "<<boat<<std::endl;
+							//std::cout<<"Inseri um barco "<<boat<<std::endl;
+							//print_puzzle(A, 15, 15);
 							negate_area(A, B[i], C[j], boat, lin, col, pos[k]);
 							return true;//Caso o barco for inserido com sucesso, retorna verdadeiro e sai da função.
 						}
@@ -701,46 +678,63 @@ bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 
 int main()
 {
+	int size = 15;
 
-	auto B = validate_position_lin(15);
-	auto C = validate_position_col(15);
+	auto B = validate_position_lin(size);
+	auto C = validate_position_col(size);
+	std::ofstream map;
+	map.open("Puzzles.txt");
+	map<<100<<std::endl;
+	map<<size<<" "<<size<<std::endl;
+
 
 	int ** A;
 
-	A = new int* [15];
+	A = new int* [size];
 
-	for(auto i{0}; i < 15; i++)
+	for(auto i{0}; i < size; i++)
 	{
-		A[i] = new int [15];
+		A[i] = new int [size];
 	}
 
-	generator_def(A, 15, 15);
+	generator_def(A, size, size);
 
-	print_puzzle( A, 15, 15);
-
-	test_position(A, B, C, 15, 15, 4);
-
-	print_puzzle( A, 15, 15);
-
-	for(auto i{0}; i < 2; i++)
+	for(auto mapas{0}; mapas < 100; mapas++)
 	{
-		test_position(A, B, C, 15, 15, 3);
-		print_puzzle( A, 15, 15);
-	}
+		test_position(A, B, C, size, size, 4);
 
+		for(auto i{0}; i < 2; i++)
+		{
+			test_position(A, B, C, size, size, 3);
+		}
+
+		for(auto i{0}; i < 3; i++)
+		{
+			test_position(A, B, C, size, size, 2);
+		}
+
+		for(auto i{0}; i < 4; i++)
+		{
+			test_position(A, B, C, size, size, 1);
+		}
 	
-	for(auto i{0}; i < 3; i++)
-	{
-		test_position(A, B, C, 15, 15, 2);
-		print_puzzle( A, 15, 15);
+		for(auto i{0}; i < size; i++)
+		{
+			for(auto j{0}; j < size; j++)
+			{
+				map<<A[i][j];
+			}
+			map<<std::endl;
+		}
+
+		map<<size<<" "<<size<<std::endl;
+		generator_def(A, size, size);
+
+		//std::random_shuffle( B, B+size );
+		//std::random_shuffle( C, C+size );
 	}
 
-	for(auto i{0}; i < 4; i++)
-	{
-		test_position(A, B, C, 15, 15, 1);
-		print_puzzle( A, 15, 15);
-	}
-	
+	map.close();
 
 	return 0;
 }
