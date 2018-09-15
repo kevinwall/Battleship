@@ -57,6 +57,16 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 {
 	bool valid = true;
 
+	if(b+boat > lin)
+	{
+		return false;
+	}
+
+	if(c+boat > col)
+	{
+		return false;
+	}
+
 	if(k == 0)
 	{
 		if(b-1 < 0)
@@ -87,7 +97,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(c+boat < col-1)
 			{
 				for(auto i{b}; i < b+1; i++)
 				{
@@ -129,7 +139,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(c+boat < col-1)
 			{
 				for(auto i{b-1}; i < b; i++)
 				{
@@ -171,7 +181,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(c+boat < col-1)
 			{
 				for(auto i{b-1}; i < b+1; i++)
 				{
@@ -216,7 +226,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(b+boat < lin-1)
 			{
 				for(auto i{b-1}; i < b+boat; i++)
 				{
@@ -258,7 +268,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(b+boat < lin-1)
 			{
 				for(auto i{b-1}; i < b+boat; i++)
 				{
@@ -300,7 +310,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(b+boat < lin-1)
 			{
 				for(auto i{b-1}; i < b+boat; i++)
 				{
@@ -319,8 +329,19 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 	return valid;
 }
 
-void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
+bool negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 {
+	if(b+boat > lin)
+	{
+		return false;
+	}
+
+	if(c+boat > col)
+	{
+		return false;
+	}
+
+
 	if(k == 0)
 	{
 		if(b-1 < 0)
@@ -351,7 +372,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(c+boat < col-1)
 			{
 				for(auto i{b}; i <= b+1; i++)
 				{
@@ -367,7 +388,6 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 		}
 		else if(b+1 == lin)
 		{
-			//std::cout<<"Entrei no caso b+1"<<std::endl;
 			if(c-1 < 0)
 			{
 				for(auto i{b-1}; i <= b; i++)
@@ -394,10 +414,8 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(c+boat < col-1)
 			{
-				//std::cout<<"Matriz do caso b+1, c  def"<<std::endl;
-				//print_puzzle(A,15, 15);
 				for(auto i{b-1}; i <= b; i++)
 				{
 					for(auto j{c-1}; j <= c+boat; j++)
@@ -410,7 +428,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 				}
 			}
 		}
-		else
+		else 
 		{
 			if(c-1 < 0)
 			{
@@ -438,13 +456,12 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(c+boat < col-1)
 			{
 				for(auto i{b-1}; i <= b+1; i++)
 				{
 					for(auto j{c-1}; j <= c+boat; j++)
 					{
-						//std::cout<<"Valor de C no teste 2: "<<c+j<<std::endl;
 						if(A[i][j] == 0)
 						{
 							A[i][j] = make_symbol(INVALID);
@@ -484,7 +501,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(b+boat < lin-1)
 			{
 				for(auto i{b-1}; i <= b+boat; i++)
 				{
@@ -526,7 +543,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(b+boat < lin-1)
 			{
 				for(auto i{b-1}; i <= b+boat; i++)
 				{
@@ -568,7 +585,7 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 					}
 				}
 			}
-			else
+			else if(b+boat < lin-1)
 			{
 				for(auto i{b-1}; i <= b+boat; i++)
 				{
@@ -583,11 +600,12 @@ void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
 			}
 		}
 	}
+
+	return true;
 }
 
 void insert_boat(int ** A, int B, int C, int boat, int k)
 {
-	//std::cout<<"Valor de B: "<<B<<" Valor de C: "<<C<<std::endl;
 	if(boat == 1)
 	{
 		A[B][C] = make_symbol( SUBMARINE );
@@ -646,26 +664,21 @@ bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 		{
 			if(A[B[i]][C[j]] == 0)//Verifica se na posição (X, Y) da matriz há espaço para a inserção.
 			{
-				//std::cout<<"Valor de B : "<<B[i]<<" e C: "<<C[j]<<std::endl;
 				for(auto k{0}; k < 2; k++)
 				{
-					//std::cout<<"TESTE 1"<<std::endl;
 					auto res_1 = colision_1(A, B[i], C[j], boat, lin, col, pos[k]);//Testa a colisão 1.
 					
 
 					if(res_1 == true)
 					{
-						//std::cout<<"Valor do barco: "<<boat<<std::endl;
-						//std::cout<<"TESTE 2"<<std::endl;
 						auto res_2 = colision_2(A, B[i], C[j], boat, lin, col, pos[k]);
-						//std::cout<<"Saí do teste 2"<<std::endl;
+
 						if(res_2 == true)
 						{
 							insert_boat(A, B[i], C[j], boat, pos[k]);
-							//std::cout<<"Inseri um barco "<<boat<<std::endl;
-							//print_puzzle(A, 15, 15);
 							negate_area(A, B[i], C[j], boat, lin, col, pos[k]);
-							return true;//Caso o barco for inserido com sucesso, retorna verdadeiro e sai da função.
+
+							return true; //Caso o barco for inserido com sucesso, retorna verdadeiro e sai da função.
 						}
 					}
 				}	
@@ -678,14 +691,13 @@ bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 
 int main()
 {
-	int size = 15;
+	int size = 12;
 
 	auto B = validate_position_lin(size);
 	auto C = validate_position_col(size);
 	std::ofstream map;
 	map.open("Puzzles.txt");
 	map<<100<<std::endl;
-	map<<size<<" "<<size<<std::endl;
 
 
 	int ** A;
@@ -701,6 +713,7 @@ int main()
 
 	for(auto mapas{0}; mapas < 100; mapas++)
 	{
+		map<<size<<" "<<size<<std::endl;
 		test_position(A, B, C, size, size, 4);
 
 		for(auto i{0}; i < 2; i++)
@@ -727,11 +740,11 @@ int main()
 			map<<std::endl;
 		}
 
-		map<<size<<" "<<size<<std::endl;
+		
 		generator_def(A, size, size);
+		B = validate_position_lin(size);
+		C = validate_position_col(size);
 
-		//std::random_shuffle( B, B+size );
-		//std::random_shuffle( C, C+size );
 	}
 
 	map.close();
