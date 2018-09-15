@@ -16,18 +16,18 @@ O arquivo gerado pelo Puzzle_Generator.cpp tem vem na seguinte formatação:
 
 P
 N M
----------
----------
----------
----------
----------
----------
+000000000
+000000000
+000000000
+000000000
+000000000
+000000000
 N M
----------
----------
----------
----------
----------
+000000000
+000000000
+000000000
+000000000
+000000000
 
 Onde P é a quantidade de puzzles e N e M as dimensões do tabuleiro de jogo.
 

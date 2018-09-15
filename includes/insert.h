@@ -6,7 +6,7 @@ int * validate_position_col( int col);
 
 int * validate_position_lin( int lin);
 
-bool colision_1(int **A, int b, int c, int boat, int lin, int col, int k);
+bool colision_1(int b, int c, int boat, int lin, int col, int k);
 
 bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k);
 

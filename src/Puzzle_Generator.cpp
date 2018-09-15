@@ -10,6 +10,12 @@ int main( int argc, char const *argv[] )
 	int size_c = std::atoi(argv[3]);
 
 
+	if(size_l < 7 || size_l > 15 || size_c < 7 || size_c > 15)
+	{
+		std::cout<<"Execute novamente com valores válidos [7,15]"<<std::endl;
+		return 0;
+	}
+
 	auto B = validate_position_lin(size_l);
 	auto C = validate_position_col(size_c);
 	std::ofstream map;

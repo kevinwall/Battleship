@@ -1,5 +1,6 @@
 #include "../includes/marker.h"
 
+//Gera os símbolos utilizados na matriz
 int make_symbol( flags x  )
 {
 	switch( x )
@@ -33,6 +34,7 @@ int make_symbol( flags x  )
 	return 7;
 }
 
+//Esta função gera uma matriz default (Com água)
 void generator_def( int ** first, int lin, int col)
 {
 	for( auto i{0} ; i < lin ; i++)
@@ -46,6 +48,7 @@ void generator_def( int ** first, int lin, int col)
 
 }
 
+//Printa no terminal a matriz do jogo
 void print_puzzle( int ** first, int lin, int col)
 {
 	std::cout<<"Printing puzzle..."<<std::endl;
