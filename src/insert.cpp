@@ -245,7 +245,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 			}
 			else
 			{
-				for(auto i{b-1}; b+boat; i++)
+				for(auto i{b-1}; i < b+boat; i++)
 				{
 					for(auto j{c}; j < c+1; j++)
 					{
@@ -287,7 +287,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 			}
 			else
 			{
-				for(auto i{b-1}; b+boat; i++)
+				for(auto i{b-1}; i < b+boat; i++)
 				{
 					for(auto j{c-1}; j < c; j++)
 					{
@@ -329,7 +329,7 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 			}
 			else
 			{
-				for(auto i{b-1}; b+boat; i++)
+				for(auto i{b-1}; i < b+boat; i++)
 				{
 					for(auto j{c-1}; j < c+1; j++)
 					{
@@ -346,8 +346,272 @@ bool colision_2(int **A, int b, int c, int boat, int lin, int col, int k)
 	return valid;
 }
 
+void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
+{
+	if(k == 0)
+	{
+		if(b-1 < 0)
+		{
+			if(c-1 < 0)
+			{
+				for(auto i{b}; i <= b+1; i++)
+				{
+					for(auto j{c}; j <= c+boat; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else if(c+boat == col)
+			{
+				for(auto i{b}; i <= b+1; i++)
+				{
+					for(auto j{c-1}; j <= c+boat-1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else
+			{
+				for(auto i{b}; i <= b+1; i++)
+				{
+					for(auto j{c-1}; j <= c+boat; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}	
+		}
+		else if(b+boat == lin-1)
+		{
+			if(c-1 < 0)
+			{
+				for(auto i{b-1}; i <= b; i++)
+				{
+					for(auto j{c}; j <= c+boat; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else if(c+boat == col)
+			{
+				for(auto i{b-1}; i <= b; i++)
+				{
+					for(auto j{c-1}; j <= c+boat-1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else
+			{
+				for(auto i{b-1}; i <= b; i++)
+				{
+					for(auto j{c-1}; j <= c+boat; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(c-1 < 0)
+			{
+				for(auto i{b-1}; i <= b+1; i++)
+				{
+					for(auto j{c}; j <= c+boat; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else if(c+boat == col)
+			{
+				for(auto i{b-1}; i <= b+1; i++)
+				{
+					for(auto j{c-1}; j <= c+boat-1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else
+			{
+				for(auto i{b-1}; i <= b+1; i++)
+				{
+					for(auto j{c-1}; j <= c+boat; j++)
+					{
+						//std::cout<<"Valor de C no teste 2: "<<c+j<<std::endl;
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if(c-1 < 0)
+		{
+			if(b-1 < 0)
+			{
+				for(auto i{b}; i <= b+boat; i++)
+				{
+					for(auto j{c}; j <= c+1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else if(b+boat == lin-1)
+			{
+				for(auto i{b-1}; i <= b+boat-1; i++)
+				{
+					for(auto j{c}; j <= c+1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else
+			{
+				for(auto i{b-1}; i <= b+boat; i++)
+				{
+					for(auto j{c}; j <= c+1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+		}
+		else if(c+1 == col-1)
+		{
+			if(b-1 < 0)
+			{
+				for(auto i{b}; i <= b+boat; i++)
+				{
+					for(auto j{c-1}; j <= c; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else if(b+boat == lin-1)
+			{
+				for(auto i{b-1}; i <= b+boat-1; i++)
+				{
+					for(auto j{c-1}; j <= c; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else
+			{
+				for(auto i{b-1}; i <= b+boat; i++)
+				{
+					for(auto j{c-1}; j <= c; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(b-1 < 0)
+			{
+				for(auto i{b}; i <= b+boat; i++)
+				{
+					for(auto j{c-1}; j <= c+1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else if(b+boat == lin-1)
+			{
+				for(auto i{b-1}; i <= b+boat-1; i++)
+				{
+					for(auto j{c-1}; j <= c+1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+			else
+			{
+				for(auto i{b-1}; i <= b+boat; i++)
+				{
+					for(auto j{c-1}; j <= c+1; j++)
+					{
+						if(A[i][j] == 0)
+						{
+							A[i][j] = make_symbol(INVALID);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 void insert_boat(int ** A, int B, int C, int boat, int k)
 {
+	//std::cout<<"Valor de B: "<<B<<" Valor de C: "<<C<<std::endl;
 	if(boat == 1)
 	{
 		A[B][C] = make_symbol( SUBMARINE );
@@ -392,26 +656,6 @@ void insert_boat(int ** A, int B, int C, int boat, int k)
 	}
 }
 
-void negate_area(int ** A, int b, int c, int boat, int lin, int col, int k)
-{
-	if(k == 0)
-	{
-		if(b-1 >= 0)
-		{
-			if(c-1 >= 0)
-			{
-				for(auto i{0}; i <= boat; i++)
-				{
-
-				}
-			}
-			
-		}
-	}
-	
-
-}
-
 //Função de teste para verificar se há posições válidas para a inserção dos barcos.
 bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 {
@@ -429,19 +673,21 @@ bool test_position( int ** A , int * B, int * C, int lin, int col, int boat)
 				std::cout<<"Valor de B : "<<B[i]<<" e C: "<<C[j]<<std::endl;
 				for(auto k{0}; k < 2; k++)
 				{
+					//std::cout<<"TESTE 1"<<std::endl;
 					auto res_1 = colision_1(A, B[i], C[j], boat, lin, col, pos[k]);//Testa a colisão 1.
 					
 
 					if(res_1 == true)
 					{
-						std::cout<<"Valor do barco: "<<boat;
+						//std::cout<<"Valor do barco: "<<boat<<std::endl;
+						//std::cout<<"TESTE 2"<<std::endl;
 						auto res_2 = colision_2(A, B[i], C[j], boat, lin, col, pos[k]);
+						//std::cout<<"Saí do teste 2"<<std::endl;
 						if(res_2 == true)
 						{
-							std::cout<<"KILL ME";
-							insert_boat(A, B[i], C[i], boat, pos[k]);
-							std::cout<<" NOW"<<std::endl;
-							//negate_area(A, B[i], C[i], boat, lin, col, pos[k]);
+							insert_boat(A, B[i], C[j], boat, pos[k]);
+							std::cout<<"Inseri um barco "<<boat<<std::endl;
+							negate_area(A, B[i], C[j], boat, lin, col, pos[k]);
 							return true;//Caso o barco for inserido com sucesso, retorna verdadeiro e sai da função.
 						}
 					}
@@ -472,17 +718,29 @@ int main()
 
 	print_puzzle( A, 15, 15);
 
-	test_position(A, B, C, 15, 15, 1);
+	test_position(A, B, C, 15, 15, 4);
 
 	print_puzzle( A, 15, 15);
 
-	test_position(A, B, C, 15, 15, 3);
+	for(auto i{0}; i < 2; i++)
+	{
+		test_position(A, B, C, 15, 15, 3);
+		print_puzzle( A, 15, 15);
+	}
 
-	print_puzzle(A, 15, 15);
+	
+	for(auto i{0}; i < 3; i++)
+	{
+		test_position(A, B, C, 15, 15, 2);
+		print_puzzle( A, 15, 15);
+	}
 
-	test_position(A, B, C, 15, 15, 1);
-
-	print_puzzle(A, 15, 15);
+	for(auto i{0}; i < 4; i++)
+	{
+		test_position(A, B, C, 15, 15, 1);
+		print_puzzle( A, 15, 15);
+	}
+	
 
 	return 0;
 }
