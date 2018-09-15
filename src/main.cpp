@@ -1,51 +1,56 @@
 #include "../includes/marker.h"
 #include "../includes/insert.h"
+#include <cstdlib>
 
-int main()
+int main( int argc, char const *argv[] )
 {
-	int size = 12;
 
-	auto B = validate_position_lin(size);
-	auto C = validate_position_col(size);
+	int qt_maps = std::atoi(argv[1]);
+	int size_l = std::atoi(argv[2]);
+	int size_c = std::atoi(argv[3]);
+
+
+	auto B = validate_position_lin(size_l);
+	auto C = validate_position_col(size_c);
 	std::ofstream map;
 	map.open("Puzzles.txt");
-	map<<100<<std::endl;
+	map<<qt_maps<<std::endl;
 
 
 	int ** A;
 
-	A = new int* [size];
+	A = new int* [size_l];
 
-	for(auto i{0}; i < size; i++)
+	for(auto i{0}; i < size_l; i++)
 	{
-		A[i] = new int [size];
+		A[i] = new int [size_c];
 	}
 
-	generator_def(A, size, size);
+	generator_def(A, size_l, size_c);
 
-	for(auto mapas{0}; mapas < 100; mapas++)
+	for(auto mapas{0}; mapas < qt_maps; mapas++)
 	{
-		map<<size<<" "<<size<<std::endl;
-		test_position(A, B, C, size, size, 4);
+		map<<size_l<<" "<<size_c<<std::endl;
+		test_position(A, B, C, size_l, size_c, 4);
 
 		for(auto i{0}; i < 2; i++)
 		{
-			test_position(A, B, C, size, size, 3);
+			test_position(A, B, C, size_l, size_c, 3);
 		}
 
 		for(auto i{0}; i < 3; i++)
 		{
-			test_position(A, B, C, size, size, 2);
+			test_position(A, B, C, size_l, size_c, 2);
 		}
 
 		for(auto i{0}; i < 4; i++)
 		{
-			test_position(A, B, C, size, size, 1);
+			test_position(A, B, C, size_l, size_c, 1);
 		}
 	
-		for(auto i{0}; i < size; i++)
+		for(auto i{0}; i < size_l; i++)
 		{
-			for(auto j{0}; j < size; j++)
+			for(auto j{0}; j < size_c; j++)
 			{
 				map<<A[i][j];
 			}
@@ -53,9 +58,9 @@ int main()
 		}
 
 		
-		generator_def(A, size, size);
-		B = validate_position_lin(size);
-		C = validate_position_col(size);
+		generator_def(A, size_l, size_c);
+		B = validate_position_lin(size_l);
+		C = validate_position_col(size_c);
 
 	}
 
