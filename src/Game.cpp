@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <vector>
 
-void print_matrix_g(int **A, int lin, int col)
+void print_matrix_g(int **A, int *C, int *D, int lin, int col)
 {
 	std::cout<<"Matriz do jogo: "<<std::endl;
 	for(auto i{0}; i < lin; i++)
@@ -16,35 +16,43 @@ void print_matrix_g(int **A, int lin, int col)
 		{
 			if(A[i][j] == 1)
 			{
-				std::cout<<"*";
+				std::cout<<"* ";
 			}
 			else if(A[i][j] == 2)
 			{
-				std::cout<<"<";
+				std::cout<<"< ";
 			}
 			else if(A[i][j] == 3)
 			{
-				std::cout<<"^";
+				std::cout<<"^ ";
 			}
 			else if(A[i][j] == 4)
 			{
-				std::cout<<">";
+				std::cout<<"> ";
 			}
 			else if(A[i][j] == 5)
 			{
-				std::cout<<"v";
+				std::cout<<"v ";
 			}
 			else if(A[i][j] == 6)
 			{
-				std::cout<<"o";
+				std::cout<<"o ";
 			}
 			else
 			{
-				std::cout<<"-";
+				std::cout<<"- ";
 			}
+
 		}
+		std::cout<<" "<<C[i];
 		std::cout<<std::endl;
 	}
+
+	for(auto k{0}; k < col; k++)
+	{
+		std::cout<<D[k]<<" ";
+	}
+	std::cout<<std::endl;
 }
 
 void print_puzzle(int **A, int lin, int col)
@@ -98,8 +106,6 @@ int main()
 	buffer>>col;
 	buffer.clear();
 
-	std::cout<<"Dimensão das matrizes: "<<lin<<" "<<col<<std::endl;
-
 	std::cout<<"Criando os vetroes: "<<std::endl;
 	
 	int ** A;
@@ -120,7 +126,15 @@ int main()
 		B[i] = new int [col];
 	};
 
-	char c;
+	int *C;
+
+	C = new int [lin];
+
+	int *D;
+	
+	D = new int [col];
+
+	char *c = new char;
 	for(auto i{0}; i < qt_maps; i++)
 	{
 		for(auto j{0}; j < lin; j++)
@@ -130,19 +144,27 @@ int main()
 
 			for(auto k{0}; k < col; k++)
 			{	
-				buffer.get(c);
-				A[j][k] = std::atoi(&c);
+				buffer.get(*c);
+				A[j][k] = std::atoi(c);
 
+				if(A[j][k] != 0 and A[j][k] != 7)
+				{
+					C[j] += 1;
+					D[k] += 1;
+				}
 			}
+
 			buffer.clear();
+
 		}
 
 		zero_seven(A, lin, col);
+		print_puzzle(A, lin, col);
 
 		std::cout<<"Olá, seja bem vindo ao battleship puzzle"<<std::endl;
 		for(auto rev{0}; rev < 5; rev++)
 		{
-			print_matrix_g(B, lin, col);
+			print_matrix_g(B, C, D, lin, col);
 			std::cout<<"Escolha 1 posição da matriz para revelar: lin col "<<std::endl;
 			std::cin>>lin_b;
 			std::cin>>col_b;
@@ -150,7 +172,7 @@ int main()
 			while(lin_b >= lin or col_b >= col or lin_b < 0 or col_b < 0)
 			{
 				std::cout<<"Você digitou uma posição inválida, insira outra entrada: lin col "<<std::endl;
-				print_matrix_g(B, lin, col);
+				print_matrix_g(B, C, D, lin, col);
 				std::cin>>lin_b;
 				std::cin>>col_b;
 			}
@@ -158,7 +180,6 @@ int main()
 			B[lin_b][col_b] = A[lin_b][col_b];
 		}
 		
-
 		while(true)
 		{
 			std::cout<<"Digite uma coordenada (Tipo X Y) para marcar ou 0 para sair: "<<std::endl;
@@ -169,7 +190,7 @@ int main()
 			<<"4- Traseira do navio (Horizontal);"<<std::endl
 			<<"5- Traseira do navio (Vertical);"<<std::endl
 			<<"6- Corpo do navio."<<std::endl;
-			print_matrix_g(B, lin, col);
+			print_matrix_g(B, C, D, lin, col);
 			std::cin>>type;
 			
 			if(type == 0)
@@ -183,7 +204,7 @@ int main()
 			while(cor_x >= lin or cor_y >= col or cor_x < 0 or cor_y < 0)
 			{
 				std::cout<<"Você digitou uma posição inválida, insira outra entrada: X Y "<<std::endl;
-				print_matrix_g(B, lin, col);
+				print_matrix_g(B, C, D, lin, col);
 				std::cin>>cor_x;
 				std::cin>>cor_y;
 			}
@@ -191,6 +212,31 @@ int main()
 			B[cor_x][cor_y] = type;
 
 		}
+
+		for(auto ziru{0}; ziru < lin; ziru++)
+		{
+			C[ziru] = 0;
+		}
+
+		for(auto zirus{0}; zirus < col; zirus++)
+		{
+			D[zirus] = 0;
+		}
+
+		for(auto alpha{0}; alpha < lin; alpha++)
+		{
+			for(auto beta{0}; beta < col; beta++)
+			{
+				B[alpha][beta] = 0;
+			}
+		}
+
+		std::getline(maps, string);
+		buffer.str(string);
+		buffer>>lin;
+		buffer>>col;
+		buffer.clear();
+		
 	}
 
 	maps.close();
