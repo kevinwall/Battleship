@@ -6,6 +6,7 @@
 #include <string>
 #include "../includes/Game_Engine.h"
 
+//Função que irá comparar as matrizes (base e do jogador).
 bool comparator( int **A, int ** B, int lin , int col)
 {
 	for( int i{0} ; i < lin ; i++)
@@ -22,10 +23,11 @@ bool comparator( int **A, int ** B, int lin , int col)
 	return true;
 }
 
+//Função que imprime a matriz do usuário.
 void print_matrix_g(int **A, int *C, int *D, int lin, int col)
 {
 	std::cout<<"Matriz do jogo: "<<std::endl;
-	for(auto i{0}; i < lin; i++)
+	for(auto i{0}; i < lin; i++) //Percorre a "matriz de tokens" e imprime os termos equivalentes na tela
 	{
 		for(auto j{0}; j < col; j++)
 		{
@@ -59,17 +61,18 @@ void print_matrix_g(int **A, int *C, int *D, int lin, int col)
 			}
 
 		}
-		std::cout<<" "<<C[i];
+		std::cout<<" "<<C[i]; //Imprime a quantidade de navios existentes em cada linha
 		std::cout<<std::endl;
 	}
 
-	for(auto k{0}; k < col; k++)
+	for(auto k{0}; k < col; k++) //Imprime a quantidade de navios existentes em cada coluna
 	{
 		std::cout<<D[k]<<" ";
 	}
 	std::cout<<std::endl;
 }
 
+//Função para debug que imprime a matriz tokenizada
 void print_puzzle(int **A, int lin, int col)
 {
 	std::cout<<"Matriz do jogo: "<<std::endl;
@@ -84,6 +87,7 @@ void print_puzzle(int **A, int lin, int col)
 	}
 }
 
+//Função que substitui os 7's da matriz "base" por zeros (para a comparação)
 void zero_seven(int **A, int lin, int col)
 {
 	for(auto i{0}; i < lin; i++)

@@ -1,4 +1,4 @@
-# Introdução: #
+﻿# Introdução: #
 
 Este projeto tem como intenção implementar o jogo puzzle battleship assim como um gerador de puzzles para se utilizar no jogo.
 
@@ -34,11 +34,18 @@ Onde P é a quantidade de puzzles e N e M as dimensões do tabuleiro de jogo.
 
 # Como compilar: #
 
+Para utilizar o gerador de puzzles: <br />
 Basta entrar no diretório do projeto e digitar o comando: <br />
 **make** <br />
 Depois basta digitar: <br />
 **./bin/battleship P N M** (Lembrando: P = quantidade de puzzles, N = quatidade de linhas e M = quantidade de colunas)<br />
-Para utilizar o gerador de puzzles, após isso, será gerado um arquivo Puzzles.txt na pasta onde foi executado o comando make. Este arquivo contém as matrizes geradas pelo gerador de puzzles
+Após isso, será gerado um arquivo Puzzles.txt na pasta onde foi executado o comando make. Este arquivo contém as matrizes geradas pelo gerador de puzzles
+
+Para utilizar o jogo: <br />
+Basta entrar no diretório do projeto e digitar o comando: <br />
+**make game** <br />
+Depois basta digitar: <br />
+**./bin/battleship**
 
 # Autoria: #
 
