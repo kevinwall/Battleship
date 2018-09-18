@@ -18,5 +18,7 @@ insert.o: $(HEADER)
 	$(CC) $(CPPFLAGS) -c $(SRC_DIR)insert.cpp
 marker.o: $(HEADER)
 	$(CC) $(CPPFLAGS) -c $(SRC_DIR)marker.cpp
+Game:
+	$(CC) -Wall -std=c++11 $(SRC_DIR)Game.cpp $(SRC_DIR)Game_Engine.cpp -o $(PROG)
 clean:
 	rm -f $(PROG) 
