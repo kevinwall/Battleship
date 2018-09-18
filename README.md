@@ -9,6 +9,8 @@ As bibliotecas utilizadas para a implementação deste projeto, fora as padrões
 	Biblioteca utilizada para inserir os caracteres na matriz e para depurar o código.
 - insert.h: 
 	Biblioteca que insere os barcos na matriz do puzzle.
+- Game_Engine.h:
+	Biblioteca com funções utilizadas para executar o jogo
 
 # Arquivo puzzle: #
 
