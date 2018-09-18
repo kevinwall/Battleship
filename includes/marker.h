@@ -1,3 +1,6 @@
+#ifndef MARKER_H
+#define MARKER_H
+
 #include <iostream>
 #include <algorithm>
 #include <iterator>
@@ -38,3 +41,5 @@ void generator_def( int ** first, int lin, int col);
 *@param int col: quantidade de colunas da matriz.
 */
 void print_puzzle( int ** first, int lin, int col);
+
+#endif

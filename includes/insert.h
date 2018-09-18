@@ -1,3 +1,6 @@
+#ifndef INSERT_H
+#define INSERT_H
+
 #include <iostream>
 #include <algorithm>
 #include <fstream>
@@ -69,3 +72,5 @@ void insert_boat(int ** A, int B, int C, int boat, int k);
 *@param int boat tamanho do barco
 */
 bool test_position( int ** A , int * B, int * C, int lin, int col, int boat);
+
+#endif

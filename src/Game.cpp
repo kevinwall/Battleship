@@ -1,13 +1,12 @@
 #include "../includes/marker.h"
 #include "../includes/insert.h"
+#include "../includes/Game_Engine.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <cstdlib>
 #include <vector>
-
-
 
 int main()
 {
@@ -61,6 +60,8 @@ int main()
 	D = new int [col];
 
 	char *c = new char;
+	int score{0};
+
 	for(auto i{0}; i < qt_maps; i++)
 	{
 		for(auto j{0}; j < lin; j++)
@@ -85,7 +86,6 @@ int main()
 		}
 
 		zero_seven(A, lin, col);
-		print_puzzle(A, lin, col);
 
 		std::cout<<"Olá, seja bem vindo ao battleship puzzle"<<std::endl;
 		for(auto rev{0}; rev < 5; rev++)
@@ -108,19 +108,30 @@ int main()
 		
 		while(true)
 		{
-			std::cout<<"Digite uma coordenada (Tipo X Y) para marcar ou 0 para sair: "<<std::endl;
+			std::cout<<"Digite uma coordenada (Tipo X Y) para marcar ou 0 para submeter seu resultado: "<<std::endl;
 			std::cout<<"Tipos de coordenada: "<<std::endl
 			<<"1- Submarino;"<<std::endl
 			<<"2- Frente do navio (Horizontal);"<<std::endl
 			<<"3- Frente do navio (Vertical);"<<std::endl
 			<<"4- Traseira do navio (Horizontal);"<<std::endl
 			<<"5- Traseira do navio (Vertical);"<<std::endl
-			<<"6- Corpo do navio."<<std::endl;
+			<<"6- Corpo do navio;"<<std::endl
+			<<"7- Remover uma peça.";
 			print_matrix_g(B, C, D, lin, col);
 			std::cin>>type;
 			
 			if(type == 0)
 			{
+				if(comparator(A, B, lin, col) == true)
+				{
+					std::cout<<"Parabéns, você acertou o puzzle."<<std::endl;
+					score++;
+				}
+				else
+				{
+					std::cout<<"Que pena, você errou o puzzle."<<std::endl;
+				}
+
 				break;
 			}
 
@@ -135,7 +146,15 @@ int main()
 				std::cin>>cor_y;
 			}
 
-			B[cor_x][cor_y] = type;
+			if(type == 7)
+			{
+				B[cor_x][cor_y] = 0;
+			}
+			else
+			{
+				B[cor_x][cor_y] = type;
+			}
+			
 
 		}
 
@@ -165,8 +184,14 @@ int main()
 		
 	}
 
+	std::cout<<"Obrigado por jogar o battleship, sua pontuação foi: "<<score<<"/"<<qt_maps<<std::endl;
+
 	maps.close();
-	//std::cout<<"A quantidade de mapas é: "<<qt_maps<<" a de linhas é: "<<lin<<" a de colunas é: "<<col<<" e a primeira linha da matriz é: "<<std::endl<<string<<std::endl;
+	delete A;
+	delete B;
+	delete C;
+	delete D;
+	delete c;
 
 	return 0;
 }
